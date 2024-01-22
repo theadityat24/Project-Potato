@@ -28,15 +28,19 @@ driver.close()
 
 stations = soup.find(class_='meal').find_all(class_='station')
 
+
+
 class FoodItem:
-    def __init__(self, station, name):
+    def __init__(self, station, name, tags=[]):
         self.station = station
         self.name = name
+        self.tags = tags
 
     def to_dict(self):
         return {
             'station': self.station,
-            'name': self.name
+            'name': self.name,
+            'tags': self.tags
         }
     
     def __str__(self):
@@ -52,10 +56,17 @@ for station in stations:
         item_detail = item.find(class_='station-item').find(class_='station-item-details')
         item_name = item_detail.find(class_='station-item-text').text
     
-        food.append(FoodItem(
+        food_item = FoodItem(
             station=station_name,
             name=item_name,
-        ))
+        )
+
+        item_tags_imgs = item_detail.find_all('img')
+     
+        tags = [img['title'] for img in item_tags_imgs]
+        food_item.tags = tags
+
+        food.append(food_item)
 
     
 
