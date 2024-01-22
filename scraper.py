@@ -1,3 +1,8 @@
+"""
+To run this you need chrome driver installed. Change the path below to your installation location.
+Also, make sure to install all the libraries below.
+"""
+
 from bs4 import BeautifulSoup
 
 from selenium import webdriver
@@ -6,11 +11,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
-service = webdriver.ChromeService(executable_path=r'C:\Program Files\chromedriver-win64\chromedriver.exe')
-driver = webdriver.Chrome(service=service)
-
 import pandas as pd
 import datetime
+
+CHROME_DRIVER_PATH = r'C:\Program Files\chromedriver-win64\chromedriver.exe'
+
+service = webdriver.ChromeService(executable_path=CHROME_DRIVER_PATH)
+driver = webdriver.Chrome(service=service)
 
 periods = ['Breakfast', 'Dinner', 'Lunch', 'Late Lunch']
 dining_halls = ['Earhart', 'Ford', 'Hillenbrand', 'Wiley', 'Windsor']
