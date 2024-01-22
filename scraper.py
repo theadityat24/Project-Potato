@@ -1,16 +1,24 @@
 from bs4 import BeautifulSoup
-from urllib.request import urlopen
-import requests
-from fake_useragent import UserAgent
-user_agent = UserAgent()
 
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+
+service = webdriver.ChromeService(executable_path=r'C:\Program Files\chromedriver-win64\chromedriver.exe')
+driver = webdriver.Chrome(service=service)
 
 url = 'https://dining.purdue.edu/menus/Earhart/2024/1/21'
 
-html = requests.get(url, headers={
-    'User-Agent': user_agent.chrome,
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-    'Accept-Language': 'en-US,en;q=0.5',
-    'Referer':  'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
-})
-soup = BeautifulSoup(html.text, 'html.parser')
+driver.get(url)
+
+WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.CLASS_NAME, 'meal'))
+)
+
+
+html = driver.page_source
+soup = BeautifulSoup(html, 'html.parser')
+
+
