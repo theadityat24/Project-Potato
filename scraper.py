@@ -27,8 +27,8 @@ today = datetime.date.today()
 # dates 10 days into the future
 dates = [today + datetime.timedelta(days=i) for i in range(10)]
 
-food_items = []
 dining_hall_items = []
+food_items = []
 nutrition_urls = {}
 
 # TODO: triple loop is ugly, reformat
@@ -73,13 +73,13 @@ for dining_hall in dining_halls:
                     tags = [img['title'] for img in item_tags_imgs]
                     if item_name not in nutrition_urls:
                         nutrition_urls[item_name] = item_a['href']
-                        dining_hall_items.append({
+                        food_items.append({
                             'name': item_name, 
                             'tags': tags,
                             'url': item_a['href']
                         })
 
-                    food_items.append({
+                    dining_hall_items.append({
                         'station': station_name,
                         'dining_hall': dining_hall,
                         'date': date,
