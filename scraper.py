@@ -49,6 +49,8 @@ for dining_hall in dining_halls:
 
             driver.get(url)
 
+            # TODO: save time by not loading pages for invalid meal times. 
+
             # time for the page to load
             WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.CLASS_NAME, 'meal'))
@@ -85,10 +87,15 @@ for dining_hall in dining_halls:
                         'period': period
                     })
 
+driver.close()
+
 food_df = pd.DataFrame(food_items)
 dining_hall_df = pd.DataFrame(dining_hall_items)
 
-driver.close()
+food_df.to_csv('food_items.csv')
+dining_hall_df.to_csv('dining_hall_items.csv')
+
+
 
     
 
