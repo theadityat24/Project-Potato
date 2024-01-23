@@ -25,7 +25,7 @@ dining_halls = ['Earhart', 'Ford', 'Hillenbrand', 'Wiley', 'Windsor']
 today = datetime.date.today()
 
 # dates 10 days into the future
-dates = [today + datetime.timedelta(days=i) for i in range(10)]
+dates = [today + datetime.timedelta(days=i) for i in range(8)]
 
 dining_hall_items = []
 food_items = []
